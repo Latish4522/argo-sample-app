@@ -1,0 +1,5 @@
+# values.yaml
+
+# This variable will be injected into the container as an environment variable
+env:
+  VAR_FROM_ARGOCD: ""

@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: print-variable
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: print-variable
+              image: busybox
+              command: ["sh", "-c"]
+              args: ["echo VAR_FROM_ARGOCD=$VAR_FROM_ARGOCD"]
+              env:
+                - name: VAR_FROM_ARGOCD
+                  value: {{ .Values.env.VAR_FROM_ARGOCD | quote }}
+          restartPolicy: OnFailure
