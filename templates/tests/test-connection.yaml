@@ -1,9 +1,8 @@
+{{- if and .Values.service .Values.service.port }}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "cron-basic.fullname" . }}-test-connection"
-  labels:
-    {{- include "cron-basic.labels" . | nindent 4 }}
+  name: test-connection
   annotations:
     "helm.sh/hook": test
 spec:
@@ -11,5 +10,6 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "cron-basic.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ .Values.service.name }}:{{ .Values.service.port }}']
   restartPolicy: Never
+{{- end }}

@@ -1,5 +1,7 @@
-# values.yaml
-
-# This variable will be injected into the container as an environment variable
 env:
   VAR_FROM_ARGOCD: ""
+
+# Optional dummy service config for test pod (safe defaults)
+service:
+  name: example-service
+  port: 80
