@@ -1,7 +1,35 @@
-env:
-  VAR_FROM_ARGOCD: ""
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: latest
 
-# Optional dummy service config for test pod (safe defaults)
+env:
+  VAR_FROM_ARGOCD: "REPLACE_ME_IN_ARGOCD"  # Fix: must not be empty or null
+
 service:
-  name: example-service
+  type: ClusterIP
   port: 80
+
+serviceAccount:
+  create: true
+  name: ""
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
